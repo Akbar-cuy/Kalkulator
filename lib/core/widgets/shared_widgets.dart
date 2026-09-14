@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/app_data.dart';
+import '../constants/app_data.dart';
 
 
 AppBar buildAppBar(String title) {

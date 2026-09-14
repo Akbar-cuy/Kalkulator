@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../data/app_data.dart';
-import '../widgets/shared_widgets.dart';
-import 'login_screen.dart';
-import 'data_kelompok_screen.dart';
-import 'aritmatika_screen.dart';
-import 'ganjil_genap_screen.dart';
-import 'jumlah_total_screen.dart';
+import '../../core/constants/app_data.dart';
+import '../../core/widgets/shared_widgets.dart';
+import '../auth/login_screen.dart';
+import '../team/data_kelompok_screen.dart';
+import '../legacy_calculators/aritmatika_screen.dart';
+import '../legacy_calculators/ganjil_genap_screen.dart';
+import '../legacy_calculators/jumlah_total_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final String username;

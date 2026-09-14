@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../data/app_data.dart';
-import '../widgets/shared_widgets.dart';
-import 'home_screen.dart';
+import '../../core/constants/app_data.dart';
+import '../../core/widgets/shared_widgets.dart';
+import '../home/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

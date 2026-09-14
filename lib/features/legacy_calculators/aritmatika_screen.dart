@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../data/app_data.dart';
-import '../widgets/shared_widgets.dart';
+import '../../core/constants/app_data.dart';
+import '../../core/widgets/shared_widgets.dart';
 
 double? parseAngka(String teks) {
   String bersih = teks.trim().replaceAll(' ', '');

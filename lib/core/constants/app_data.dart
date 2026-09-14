@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'app_colors.dart';
 
-const Color kPrimaryColor = Color(0xFF1E3A8A);
-const Color kPrimaryDark = Color(0xFF14265C);
-const Color kAccentColor = Color(0xFFF97316);
-const Color kBackgroundColor = Color(0xFFF2F4FA);
-const Color kSuccessColor = Color(0xFF16A34A);
-const Color kTextMuted = Color(0xFF475569);
+const Color kPrimaryColor = AppColors.primary;
+const Color kPrimaryDark = AppColors.primaryDark;
+const Color kAccentColor = AppColors.accent;
+const Color kBackgroundColor = AppColors.background;
+const Color kSuccessColor = AppColors.success;
+const Color kTextMuted = AppColors.textMuted;
 
 
 const String namaApl = 'CalculateDD';
