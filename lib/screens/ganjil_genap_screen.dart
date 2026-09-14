@@ -32,8 +32,7 @@ class _GanjilGenapScreenState extends State<GanjilGenapScreen> {
       return;
     }
 
-    final int? angka = int.tryParse(teks);
-    if (angka == null) {
+    if (!RegExp(r'^[+-]?\d+$').hasMatch(teks)) {
       setState(() {
         _errorMessage = 'Input tidak valid. Ganjil/genap hanya berlaku untuk '
             'bilangan bulat (boleh negatif & besar), bukan desimal.';
@@ -44,8 +43,8 @@ class _GanjilGenapScreenState extends State<GanjilGenapScreen> {
 
     setState(() {
       _errorMessage = null;
-      _genap = angka % 2 == 0;
-      _hasil = '$angka adalah bilangan ${_genap ? 'GENAP' : 'GANJIL'}';
+      _genap = '02468'.contains(teks[teks.length - 1]);
+      _hasil = '$teks adalah bilangan ${_genap ? 'GENAP' : 'GANJIL'}';
     });
   }
 
