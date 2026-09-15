@@ -28,45 +28,69 @@ Kode dianggap selesai jika: (1) fitur berjalan sesuai `PRD.md`, (2) tidak menamb
 
 ## 2. Directory & File Placement Standards
 
-### 2.1 Struktur Direktori Resmi (Tidak Boleh Diubah tanpa Instruksi Eksplisit)
+### 2.1 Struktur Direktori Resmi (Disesuaikan dengan Proyek Saat Ini)
 
 ```
 lib/
-├── main.dart                     # Entry point, Firebase.initializeApp(), root MaterialApp
+├── main.dart                     # Entry point aplikasi, root MaterialApp
 ├── core/
-│   └── services/
-│       ├── session_service.dart      # SEMUA logic shared_preferences
-│       └── firestore_service.dart    # SEMUA logic CRUD Firestore koleksi workouts
-├── data/
-│   └── app_data.dart              # Konstanta warna (kPrimaryColor, dll.), data statis anggota kelompok
-├── widgets/
-│   └── shared_widgets.dart        # SEMUA komponen UI reusable (tombol, card menu, dialog, error box)
+│   ├── constants/
+│   │   ├── app_colors.dart       # Token warna utama aplikasi
+│   │   ├── app_data.dart         # Data statis seperti username akun, nama anggota, nama aplikasi
+│   │   ├── app_dimens.dart       # Ukuran radius, spacing, dsb.
+│   │   └── app_text_styles.dart  # Tema typography aplikasi
+│   ├── services/
+│   │   ├── session_service.dart  # Logic shared_preferences
+│   │   └── firestore_service.dart# Logic CRUD Firestore koleksi workouts
+│   └── widgets/
+│       ├── error_box.dart        # Komponen error box
+│       ├── menu_card_button.dart # Kartu menu utama
+│       └── shared_widgets.dart   # Widget reusable gabungan
+├── features/
+│   ├── age_hijri/
+│   │   └── age_hijri_screen.dart
+│   ├── auth/
+│   │   └── login_screen.dart
+│   ├── culture_calendar/
+│   │   └── culture_calendar_screen.dart
+│   ├── fitness_calculator/
+│   │   └── fitness_calculator_screen.dart
+│   ├── help/
+│   │   └── help_screen.dart
+│   ├── home/
+│   │   └── home_screen.dart
+│   ├── legacy_calculators/
+│   │   ├── aritmatika_screen.dart
+│   │   ├── ganjil_genap_screen.dart
+│   │   └── jumlah_total_screen.dart
+│   ├── shell/
+│   │   └── main_shell.dart
+│   ├── stopwatch/
+│   │   └── stopwatch_screen.dart
+│   ├── team/
+│   │   └── data_kelompok_screen.dart
+│   └── workout/
+│       ├── workout_crud_screen.dart
+│       └── workout_form_sheet.dart
 ├── models/
-│   └── workout_model.dart         # Model data (opsional, jika tidak pakai Map<String,dynamic> langsung)
-└── screens/
-    ├── login_screen.dart
-    ├── main_shell_screen.dart     # BottomNavigationBar root
-    ├── home_screen.dart
-    ├── data_kelompok_screen.dart
-    ├── fitness_calculator_screen.dart
-    ├── workout_crud_screen.dart
-    ├── age_hijri_screen.dart
-    ├── culture_calendar_screen.dart
-    ├── stopwatch_screen.dart
-    └── help_screen.dart
+│   └── workout_model.dart
+├── utils/
+│   ├── date_utils.dart
+│   └── validators.dart
+└── ...
 ```
 
 ### 2.2 Aturan Penempatan File Baru
 
 | Jenis Kode | Wajib Ditaruh Di | Contoh |
 |---|---|---|
-| Layar/halaman baru (punya `Scaffold`) | `lib/screens/<nama>_screen.dart` | `workout_form_screen.dart` |
-| Widget reusable (dipakai ≥ 2 layar) | Ditambahkan ke `lib/widgets/shared_widgets.dart` (jangan buat file baru per-widget kecuali file ini sudah terlalu besar) | Fungsi/class baru di file yang sama |
+| Layar/halaman baru (punya `Scaffold`) | `lib/features/<feature>/<nama>_screen.dart` atau file sesuai modul yang sudah ada | `workout_crud_screen.dart`, `login_screen.dart` |
+| Widget reusable (dipakai ≥ 2 layar) | Diletakkan di `lib/core/widgets/` sesuai file yang paling mirip; jangan bikin folder baru yang tidak konsisten | `error_box.dart`, `menu_card_button.dart` |
 | Logic akses Firestore | Method baru di `lib/core/services/firestore_service.dart` | `getWorkouts()`, `addWorkout()`, `updateWorkout()`, `deleteWorkout()` |
 | Logic sesi/login | Method baru di `lib/core/services/session_service.dart` | `login()`, `logout()`, `isLoggedIn()`, `getUsername()` |
-| Warna, teks statis, data anggota kelompok | `lib/data/app_data.dart` | `kPrimaryColor`, `kAccentColor`, `List<Anggota> daftarAnggota` |
+| Warna, teks statis, data anggota kelompok | `lib/core/constants/app_data.dart` | `kPrimaryColor`, `kAccentColor`, `namaAnggota` |
 | Model data terstruktur | `lib/models/<nama>_model.dart` | `WorkoutModel` dengan `fromMap()`/`toMap()` |
-| Fungsi kalkulasi murni (BMI, BMR, Weton, Saka, Hijriah) | Boleh sebagai method statis di dalam screen terkait **atau** file helper baru di `lib/core/` **hanya jika** dipakai lebih dari satu screen — tanyakan ke pengguna jika ragu, jangan berasumsi | `calculateBMI()`, `calculateNeptu()` |
+| Fungsi kalkulasi murni (BMI, BMR, Weton, Saka, Hijriah) | Boleh sebagai method statis di dalam screen terkait **atau** file helper baru di `lib/utils/` jika dipakai lebih dari satu screen | `calculateBMI()`, `calculateNeptu()` |
 
 **Aturan emas**: jika AI tidak yakin di mana menaruh kode baru, **ikuti pola file yang paling mirip yang sudah ada**, jangan membuat struktur folder baru sendiri.
 
@@ -75,15 +99,15 @@ lib/
 - **Wajib** menggunakan package import, **dilarang** relative import berlapis (`../../`):
   ```dart
   // ✅ BENAR
-  import 'package:fitcalculate/core/services/firestore_service.dart';
-  import 'package:fitcalculate/data/app_data.dart';
-  import 'package:fitcalculate/widgets/shared_widgets.dart';
+  import 'package:nando/core/services/firestore_service.dart';
+  import 'package:nando/core/constants/app_data.dart';
+  import 'package:nando/core/widgets/shared_widgets.dart';
 
   // ❌ SALAH — rawan broken path saat file dipindah
   import '../../core/services/firestore_service.dart';
   ```
-- Import relative satu level (`import 'workout_form_screen.dart';` dalam folder yang sama) masih dapat ditoleransi, tetapi package import tetap prioritas utama, khususnya untuk lintas folder (`core/`, `data/`, `widgets/`, `models/` ke `screens/`).
-- Cek nama package di `pubspec.yaml` (`name: fitcalculate`) sebelum menulis import — jangan menebak nama package.
+- Import relative satu level (`import 'workout_form_sheet.dart';` dalam folder yang sama) masih dapat ditoleransi, tetapi package import tetap prioritas utama, khususnya untuk lintas folder (`core/`, `features/`, `models/`, `utils/`).
+- Cek nama package di `pubspec.yaml` sebelum menulis import. Saat ini nama package aktif adalah `nando` sesuai isi file `pubspec.yaml`.
 
 ---
 
@@ -159,7 +183,7 @@ StreamBuilder di dalam workout_crud_screen.dart
 
 ### 4.1 Wajib Pakai Konstanta yang Sudah Ada
 
-- **Dilarang** menulis warna heksadesimal baru (`Color(0xFF...)`) langsung di dalam widget/screen. **Selalu** rujuk ke konstanta di `lib/data/app_data.dart`.
+- **Dilarang** menulis warna heksadesimal baru (`Color(0xFF...)`) langsung di dalam widget/screen. **Selalu** rujuk ke konstanta di `lib/core/constants/app_data.dart` atau `lib/core/constants/app_colors.dart`.
   ```dart
   // ✅ BENAR
   color: kPrimaryColor,
@@ -167,7 +191,7 @@ StreamBuilder di dalam workout_crud_screen.dart
   // ❌ SALAH
   color: Color(0xFF1E3A8A),
   ```
-- Jika butuh warna/style baru yang belum ada di `app_data.dart` (misal warna error/danger), **tambahkan sebagai konstanta baru di file tersebut terlebih dahulu**, jangan hardcode di lokasi pemakaian.
+- Jika butuh warna/style baru yang belum ada di file konstanta, **tambahkan sebagai konstanta baru di `app_data.dart` atau `app_colors.dart` terlebih dahulu**, jangan hardcode di lokasi pemakaian.
 - Konstanta visual yang sudah baku dan **tidak boleh diubah nilainya** tanpa instruksi eksplisit:
   `kPrimaryColor` (`#1E3A8A`), `kPrimaryDark` (`#14265C`), `kAccentColor` (`#F97316`), `kBackgroundColor` (`#F2F4FA`), `kSuccessColor` (`#16A34A`), `kTextMuted` (`#475569`).
 - Radius kartu/tombol konsisten di rentang `12–16`, bayangan lembut `BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8–10)` — pakai ulang pola ini, jangan bikin varian shadow baru per-widget.
@@ -198,9 +222,9 @@ StreamBuilder di dalam workout_crud_screen.dart
 
 ### 4.4 Checklist Cepat Sebelum AI Menyelesaikan Task
 
-- [ ] File baru ditaruh sesuai Bab 2.2?
-- [ ] Import pakai `package:fitcalculate/...`, bukan `../../`?
-- [ ] Tidak ada warna hex baru di luar `app_data.dart`?
+- [ ] File baru ditaruh sesuai Bab 2.2 dan struktur folder aktual?
+- [ ] Import pakai `package:nando/...` atau path yang sesuai `pubspec.yaml`, bukan `../../`?
+- [ ] Tidak ada warna hex baru di luar `lib/core/constants/`?
 - [ ] Akses Firestore hanya lewat `FirestoreService`, akses sesi hanya lewat `SessionService`?
 - [ ] Tidak menambah library state management/DI baru?
 - [ ] Ada validasi input & penanganan loading/error/empty state?

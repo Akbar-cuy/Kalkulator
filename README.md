@@ -1,6 +1,6 @@
-# CalculateDD
+# CalculateDD / FitCalculate
 
-Aplikasi mobile berbasis Flutter yang dikembangkan untuk kebutuhan kalkulator kesehatan, kebugaran, dan penanggalan budaya. Project ini menggabungkan berbagai fitur seperti login sederhana, jadwal workout, BMI/BMR, stopwatch, kalender Hijriah, serta kalender budaya Jawa dan Bali dalam satu aplikasi.
+Aplikasi mobile berbasis Flutter yang dikembangkan untuk kebutuhan kalkulator kesehatan, kebugaran, dan penanggalan budaya. Dalam implementasi kode saat ini, aplikasi ini dipanggil dengan nama `CalculateDD`, sementara dokumen produk dan desain umum menyebutnya sebagai `FitCalculate`. Project ini menggabungkan berbagai fitur seperti login sederhana, jadwal workout, BMI/BMR, stopwatch, kalender Hijriah, serta kalender budaya Jawa dan Bali dalam satu aplikasi.
 
 ## Deskripsi Proyek
 
@@ -58,7 +58,8 @@ Kalkulator/
 │   └── ...
 ├── docs/
 │   ├── design.md
-│   └── prd.md
+│   ├── prd.md
+│   └── architecture.md
 ├── test/
 │   └── widget_test.dart
 ├── analysis_options.yaml
