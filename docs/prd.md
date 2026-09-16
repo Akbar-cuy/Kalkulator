@@ -357,7 +357,7 @@ lib/
 | Setup Proyek & Integrasi Firebase | **R/A** | C | I | I |
 | Autentikasi & Sesi Login (`shared_preferences`) + Gatekeeper Flow | **R/A** | I | C | I |
 | Bottom Navigation Shell & Halaman Utama (5 menu) | C | **R/A** | I | I |
-| Menu 1 — Data/Daftar Anggota Kelompok | I | **R/A** | C | I |
+| Menu 1 — Data/Daftar Anggota Kelompok | **R/A** | I | C | I |
 | Menu 2 — Komputasi Kesehatan (BMI & BMR) | I | C | **R/A** | I |
 | Menu 3 — CRUD Workout (Cloud Firestore) | C | I | I | **R/A** |
 | Menu 4 — Konversi Hijriah & Kalkulator Umur | I | C | **R/A** | I |
@@ -365,7 +365,7 @@ lib/
 | Fitur Stopwatch | C | **R/A** | I | I |
 | Halaman Bantuan & Logout | I | I | I | **R/A** |
 | UI/UX Konsistensi & Styling Global | C | C | C | C (seluruh anggota) |
-| Dokumentasi (PRD, Laporan, README) | **R/A** | C | C | C |
+| Dokumentasi (PRD, Laporan, README) | C | **R/A** | C | C |
 | Pengujian & QA Akhir | C | C | C | C (seluruh anggota) |
 
 > Catatan: Meskipun setiap anggota memiliki modul utama (Accountable), seluruh anggota tetap berkontribusi dalam proses *code review*, integrasi antar-modul, dan pengujian akhir sebelum pengumpulan tugas besar.

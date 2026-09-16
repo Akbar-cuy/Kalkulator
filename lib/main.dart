@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'core/constants/app_data.dart';
-import 'features/auth/login_screen.dart';
+import 'package:nando/features/auth/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: namaApl,
+      title: 'FitCalculate',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),
-        scaffoldBackgroundColor: kBackgroundColor,
-        fontFamily: 'Roboto',
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1E88E5)),
+        scaffoldBackgroundColor: const Color(0xFFF4F7FB),
       ),
       home: const LoginScreen(),
     );

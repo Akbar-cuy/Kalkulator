@@ -1,6 +1,6 @@
-# CalculateDD / FitCalculate
+# FitCalculate
 
-Aplikasi mobile berbasis Flutter yang dikembangkan untuk kebutuhan kalkulator kesehatan, kebugaran, dan penanggalan budaya. Dalam implementasi kode saat ini, aplikasi ini dipanggil dengan nama `CalculateDD`, sementara dokumen produk dan desain umum menyebutnya sebagai `FitCalculate`. Project ini menggabungkan berbagai fitur seperti login sederhana, jadwal workout, BMI/BMR, stopwatch, kalender Hijriah, serta kalender budaya Jawa dan Bali dalam satu aplikasi.
+Aplikasi mobile berbasis Flutter untuk kesehatan, kebugaran, dan penanggalan budaya. FitCalculate merupakan pengembangan lanjutan dari CalculateDD. Sebagian kode saat ini masih menggunakan nama runtime `CalculateDD`, sedangkan nama produk dan dokumen resmi menggunakan `FitCalculate`.
 
 ## Deskripsi Proyek
 
@@ -12,19 +12,21 @@ Proyek ini dibuat sebagai aplikasi mobile untuk membantu pengguna dalam:
 - melihat informasi kalender dan umur secara detail,
 - serta mengakses modul bantuan dan data tim pengembang.
 
-Aplikasi ini dibangun dengan bahasa Dart dan framework Flutter, serta memanfaatkan package seperti `shared_preferences`, `firebase_core`, dan `cloud_firestore`.
+Aplikasi ini dibangun dengan bahasa Dart dan framework Flutter, serta memanfaatkan `shared_preferences` untuk sesi lokal, Firebase/Cloud Firestore untuk data workout realtime, `intl` untuk pemformatan tanggal, dan `hijri` untuk konversi kalender Hijriah.
 
 ## Fitur Utama
 
 - Autentikasi sederhana dengan username dan session login lokal
 - Navigasi utama menggunakan Bottom Navigation
-- Halaman dashboard berisi beberapa menu fitur
+- Halaman utama dengan lima menu fitur
 - Kalkulator BMI dan BMR/TDEE
 - CRUD jadwal workout dengan data Firestore
 - Stopwatch latihan
 - Konversi kalender Hijriah dan kalkulator umur
 - Konversi Weton Jawa dan Kalender Saka Bali
 - Halaman bantuan serta daftar tim pengembang
+
+Untuk Weton Jawa dan Kalender Saka Bali, logika perhitungan dibuat sebagai fungsi Dart lokal sesuai keputusan pada PRD.
 
 ## Struktur Folder
 
@@ -71,13 +73,16 @@ Kalkulator/
 └── ...
 ```
 
-## Teknologi yang Digunakan
+## Teknologi dan Dependensi
 
 - Flutter
 - Dart
-- Firebase Core
-- Cloud Firestore
-- Shared Preferences
+- `firebase_core`
+- `cloud_firestore`
+- `shared_preferences`
+- `intl`
+- `hijri`
+- `cupertino_icons`
 - Material Design 3
 
 ## Persyaratan Sistem
@@ -87,25 +92,30 @@ Sebelum menjalankan proyek, pastikan perangkat Anda sudah memiliki:
 - Flutter SDK terinstall
 - Dart SDK terinstall
 - Android Studio / VS Code
-- Emulator Android atau perangkat fisik
+- Emulator Android, perangkat fisik, atau browser Edge untuk pengujian web
 - Koneksi internet untuk dependency dan Firebase
 
 ## Cara Menjalankan
 
-1. Clone repository ini
-2. Masuk ke folder project
-3. Jalankan perintah:
+1. Masuk ke folder project
+2. Jalankan perintah:
 
 ```bash
 flutter pub get
 flutter run
 ```
 
-Jika Anda menggunakan emulator atau perangkat Android, pastikan device sudah terhubung dan driver Android sudah siap.
+Untuk menjalankan melalui Edge, gunakan:
+
+```bash
+flutter run -d edge
+```
+
+Jika menggunakan emulator atau perangkat Android, pastikan device sudah terhubung dan driver Android sudah siap.
 
 ## Catatan Penting
 
-Proyek ini masih dalam tahap pengembangan dan beberapa modul didesain sesuai dokumentasi PRD dan design system yang ada di folder `docs/`. Pastikan konfigurasi Firebase dan asset tambahan sudah siap jika Anda ingin menjalankan aplikasi dengan data backend yang lengkap.
+Proyek ini dikembangkan berdasarkan [PRD](docs/prd.md), [design system](docs/design.md), dan [aturan arsitektur](docs/architecture.md). Pastikan konfigurasi Firebase sudah siap agar fitur CRUD workout dapat menggunakan backend secara lengkap.
 
 ## Tim Pengembang
 

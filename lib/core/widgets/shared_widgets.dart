@@ -81,6 +81,7 @@ class MenuCard extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(18),
       child: Container(
+        constraints: const BoxConstraints(minHeight: 124),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(18),
@@ -88,23 +89,24 @@ class MenuCard extends StatelessWidget {
             BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 12, offset: const Offset(0, 4)),
           ],
         ),
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        child: Row(
           children: [
             Container(
-              width: 52,
-              height: 52,
+              width: 60,
+              height: 60,
               alignment: Alignment.center,
               decoration: BoxDecoration(color: color.withOpacity(0.12), shape: BoxShape.circle),
-              child: Icon(icon, color: color, size: 26),
+              child: Icon(icon, color: color, size: 30),
             ),
-            const SizedBox(height: 12),
-            Text(
-              label,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: kTextMuted),
+            const SizedBox(width: 18),
+            Expanded(
+              child: Text(
+                label,
+                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600, color: kTextMuted),
+              ),
             ),
+            Icon(Icons.arrow_forward_ios_rounded, color: color, size: 20),
           ],
         ),
       ),

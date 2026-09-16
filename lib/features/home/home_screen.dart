@@ -1,62 +1,54 @@
 import 'package:flutter/material.dart';
-import '../../core/constants/app_data.dart';
-import '../../core/widgets/shared_widgets.dart';
-import '../auth/login_screen.dart';
-import '../team/data_kelompok_screen.dart';
-import '../legacy_calculators/aritmatika_screen.dart';
-import '../legacy_calculators/ganjil_genap_screen.dart';
-import '../legacy_calculators/jumlah_total_screen.dart';
+import 'package:nando/core/constants/app_data.dart';
+import 'package:nando/core/widgets/shared_widgets.dart';
+import 'package:nando/features/age_hijri/age_hijri_screen.dart';
+import 'package:nando/features/culture_calendar/culture_calendar_screen.dart';
+import 'package:nando/features/fitness_calculator/fitness_calculator_screen.dart';
+import 'package:nando/features/team/data_kelompok_screen.dart';
+import 'package:nando/features/workout/workout_crud_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final String username;
 
   const HomeScreen({super.key, required this.username});
 
-  void _logout(BuildContext context) {
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => const LoginScreen()),
-      (route) => false,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Menu Utama'),
-        backgroundColor: kPrimaryColor,
-        foregroundColor: Colors.white,
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            tooltip: 'Keluar',
-            onPressed: () => _logout(context),
-          ),
-        ],
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Selamat datang, $username!',
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: kPrimaryDark),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.fromLTRB(24, 28, 24, 30),
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(colors: [kPrimaryColor, kPrimaryDark]),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(24),
+                    bottomRight: Radius.circular(24),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Halo, $username!',
+                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                    const SizedBox(height: 6),
+                    const Text(
+                      'Semangat berlatih hari ini.',
+                      style: TextStyle(fontSize: 14, color: Colors.white70),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 4),
-              const Text(namaApl, style: TextStyle(fontSize: 13, color: kTextMuted)),
-              const SizedBox(height: 24),
-              GridView.count(
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                mainAxisSpacing: 16,
-                crossAxisSpacing: 16,
-                childAspectRatio: 1.05,
-                children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
+                child: Column(
+                  children: [
                   MenuCard(
                     icon: Icons.group,
                     label: 'Data Kelompok',
@@ -65,31 +57,44 @@ class HomeScreen extends StatelessWidget {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => const DataKelompokScreen()));
                     },
                   ),
+                  const SizedBox(height: 16),
                   MenuCard(
-                    icon: Icons.calculate,
-                    label: 'Operasi Aritmatika',
+                    icon: Icons.fitness_center,
+                    label: 'Komputasi Kebugaran',
                     color: kAccentColor,
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const AritmatikaScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const FitnessCalculatorScreen()));
                     },
                   ),
+                  const SizedBox(height: 16),
                   MenuCard(
-                    icon: Icons.numbers,
-                    label: 'Ganjil / Genap',
+                    icon: Icons.event_note,
+                    label: 'Jadwal Workout',
                     color: kSuccessColor,
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const GanjilGenapScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const WorkoutCrudScreen()));
                     },
                   ),
+                  const SizedBox(height: 16),
                   MenuCard(
-                    icon: Icons.functions,
-                    label: 'Jumlah Angka dalam Teks',
+                    icon: Icons.calendar_month,
+                    label: 'Kalender Hijriah dan Umur',
                     color: kPrimaryDark,
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const JumlahTotalScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const AgeHijriScreen()));
                     },
                   ),
-                ],
+                  const SizedBox(height: 16),
+                  MenuCard(
+                    icon: Icons.public,
+                    label: 'Kalender Budaya',
+                    color: kPrimaryColor,
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CultureCalendarScreen()));
+                    },
+                  ),
+                  ],
+                ),
               ),
             ],
           ),

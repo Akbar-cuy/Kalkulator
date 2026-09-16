@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../core/constants/app_data.dart';
-import '../../core/widgets/shared_widgets.dart';
-import '../home/home_screen.dart';
+import 'package:nando/core/constants/app_data.dart';
+import 'package:nando/core/widgets/shared_widgets.dart';
+import 'package:nando/features/shell/main_shell.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (akunLogin.containsKey(username) && akunLogin[username] == password) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen(username: username)),
+        MaterialPageRoute(builder: (context) => MainShell(username: username)),
       );
     } else {
       setState(() {
@@ -110,11 +110,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: const Text('Login', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                 ),
                 const SizedBox(height: 20),
-                Text(
-                  'Dummy akun: adit / 22',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
-                ),
               ],
             ),
           ),

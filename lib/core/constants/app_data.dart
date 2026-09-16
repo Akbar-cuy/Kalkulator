@@ -9,7 +9,7 @@ const Color kSuccessColor = AppColors.success;
 const Color kTextMuted = AppColors.textMuted;
 
 
-const String namaApl = 'CalculateDD';
+const String namaApl = 'FitCalculate';
 const String mataKuliah = 'Pemrograman Aplikasi Mobile';
 
 final List<String> namaAnggota = [
